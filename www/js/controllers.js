@@ -29,15 +29,42 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
 
+  $scope.data = {};
+
+  $scope.signupEmail = function(){
+ 
+      //Create a new user on Parse
+      var user = new Parse.User();
+      user.set("username", $scope.data.username);
+      user.set("password", $scope.data.password);
+      user.set("email", $scope.data.email);
+     
+      user.signUp(null, {
+        success: function(user) {
+          // Hooray! Let them use the app now.
+          alert("success!");
+        },
+        error: function(user, error) {
+          // Show the error message somewhere and let the user try again.
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
+ 
+  };
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    Parse.User.logIn($scope.loginData.username, $scope.loginData.password, {
+              success: function(user) {
+                  $scope.closeLogin();
+              },
+              error: function(user, error) {
+                alert("error!");
+              }
+     });
+
   };
 })
 

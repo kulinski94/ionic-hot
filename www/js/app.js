@@ -7,6 +7,9 @@
 angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function($ionicPlatform) {
+
+  Parse.initialize("3EAq5RRWJYAfmsufDkGBeccILJsqR9RkOlAfDIRS", "EpNM31N72UoyK8rBQcVQfETIFDeWZPkYgYBvz600");
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -64,6 +67,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'menuContent': {
         templateUrl: 'templates/playlist.html',
+        controller: 'PlaylistCtrl'
+      }
+    }
+  })
+  .state('app.signup', {
+    url: '/signup',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/signup.html',
         controller: 'PlaylistCtrl'
       }
     }
